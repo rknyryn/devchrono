@@ -39,9 +39,3 @@ Sessizce projelerinizde harcanan zamanı takip edin. Hiçbir manuel kayıt, hiç
 | `devchrono.idleTimeoutMinutes` | number | `10` | Boşta kalma eşiği (1-120 dakika) |
 
 ---
-
-## 📜 Lisans
-
-MIT
-
----

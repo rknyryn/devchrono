@@ -1,0 +1,151 @@
+{
+  "name": "devchrono",
+  "displayName": "DevChrono",
+  "description": "Silently track time spent in your projects.",
+  "version": "1.0.0",
+  "publisher": "ryarayan",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryarayan_otosan/devchrono.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "configuration": {
+      "title": "DevChrono",
+      "properties": {
+        "devchrono.statusBarMode": {
+          "type": "string",
+          "default": "total",
+          "enum": ["total", "today", "session"],
+          "enumDescriptions": [
+            "Tüm zamanların toplamını gösterir",
+            "Bugün harcanan toplam zamanı gösterir",
+            "Sadece aktif oturum süresini gösterir"
+          ],
+          "description": "Status bar'da hangi sürenin gösterileceğini belirler."
+        },
+        "devchrono.showSeconds": {
+          "type": "boolean",
+          "default": true,
+          "description": "Status bar zamanlayıcısında saniyeleri gösterir ve her saniye günceller."
+        },
+        "devchrono.enableIdleDetection": {
+          "type": "boolean",
+          "default": true,
+          "description": "Hareketsizlik süresini oturum süresinden otomatik olarak çıkarır."
+        },
+        "devchrono.idleTimeoutMinutes": {
+          "type": "number",
+          "default": 10,
+          "minimum": 1,
+          "maximum": 120,
+          "description": "Kaç dakika hareketsizlik sonrasında oturum bekleme moduna geçer."
+        },
+        "devchrono.pomodoro.workMinutes": {
+          "type": "number",
+          "default": 25,
+          "minimum": 1,
+          "maximum": 120,
+          "description": "Pomodoro çalışma fazı süresi (dakika)."
+        },
+        "devchrono.pomodoro.breakMinutes": {
+          "type": "number",
+          "default": 5,
+          "minimum": 1,
+          "maximum": 60,
+          "description": "Pomodoro mola fazı süresi (dakika)."
+        },
+        "devchrono.pomodoro.breakEnforcement": {
+          "type": "string",
+          "enum": ["soft", "persistent"],
+          "enumDescriptions": [
+            "Mola paneli açılır, kullanıcı istediği zaman kapatabilir.",
+            "Mola paneli kapatılmaya çalışıldığında yeniden açılır."
+          ],
+          "default": "persistent",
+          "description": "Mola ekranı zorunluluğu: soft (serbest) veya persistent (yeniden açılır)."
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "devchrono",
+          "title": "DevChrono",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "devchrono": [
+        {
+          "type": "webview",
+          "id": "devchrono.quickPanelView",
+          "name": "DevChrono"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "devchrono.showSummary",
+        "title": "DevChrono: Show Summary"
+      },
+      {
+        "command": "devchrono.showQuickPanel",
+        "title": "DevChrono: Hızlı Panel"
+      },
+      {
+        "command": "devchrono.showToday",
+        "title": "DevChrono: Show Today"
+      },
+      {
+        "command": "devchrono.resetLog",
+        "title": "DevChrono: Reset Log"
+      },
+      {
+        "command": "devchrono.showGitTimeline",
+        "title": "DevChrono: Show Git Timeline"
+      },
+      {
+        "command": "devchrono.startPomodoro",
+        "title": "DevChrono: Pomodoro Başlat"
+      },
+      {
+        "command": "devchrono.stopPomodoro",
+        "title": "DevChrono: Pomodoro Durdur"
+      },
+      {
+        "command": "devchrono.skipBreak",
+        "title": "DevChrono: Molayı Atla"
+      },
+      {
+        "command": "devchrono.exportLog",
+        "title": "DevChrono: Export Log as CSV"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "setup:test": "node setup-test-dirs.js",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^18.0.0",
+    "typescript": "^5.0.0",
+    "@vscode/test-electron": "^2.3.0",
+    "@vscode/vsce": "^2.24.0"
+  }
+}

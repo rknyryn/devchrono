@@ -1,0 +1,119 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--vscode-editor-background);
+  color: var(--vscode-editor-foreground);
+  font-family: var(--vscode-font-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: var(--vscode-font-size, 13px);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.break-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+
+.break-icon {
+  font-size: 3.5rem;
+  line-height: 1;
+  /* subtle breathing animation */
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50%       { transform: scale(1.08); opacity: 1; }
+}
+
+.break-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--vscode-editor-foreground);
+  letter-spacing: 0.02em;
+}
+
+.break-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.65;
+  line-height: 1.5;
+}
+
+.countdown {
+  font-size: 5rem;
+  font-family: var(--vscode-editor-font-family), 'Courier New', Courier, monospace;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  /* teal accent — calming, not alarming */
+  color: #4ec9b0;
+  line-height: 1;
+  min-width: 8ch;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  max-width: 400px;
+  height: 6px;
+  background: color-mix(in srgb, var(--vscode-editor-foreground) 12%, transparent);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--vscode-progressBar-background, #4ec9b0);
+  border-radius: 3px;
+  width: 100%;
+  transition: width 1s linear;
+}
+
+.skip-btn {
+  margin-top: 0.5rem;
+  padding: 0.45rem 1.1rem;
+  background: transparent;
+  color: var(--vscode-editor-foreground);
+  border: 1px solid color-mix(in srgb, var(--vscode-editor-foreground) 25%, transparent);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  opacity: 0.45;
+  cursor: pointer;
+  transition: opacity 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+}
+
+.skip-btn:hover {
+  opacity: 0.85;
+  background: color-mix(in srgb, var(--vscode-button-background, #0e639c) 18%, transparent);
+  border-color: color-mix(in srgb, var(--vscode-editor-foreground) 45%, transparent);
+}
+
+.skip-btn:active {
+  opacity: 1;
+  background: color-mix(in srgb, var(--vscode-button-background, #0e639c) 30%, transparent);
+}
+
+/* Narrow panel widths */
+@media (max-width: 320px) {
+  .countdown {
+    font-size: 3.5rem;
+  }
+  .break-title {
+    font-size: 1.35rem;
+  }
+}

@@ -1,0 +1,276 @@
+/* DevChrono Quick Panel — compact status popup */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+  font-weight: var(--vscode-font-weight);
+  color: var(--vscode-editor-foreground);
+  background-color: var(--vscode-editor-background);
+  padding: 12px;
+  line-height: 1.5;
+}
+
+/* ── Header ─────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--vscode-panel-border, var(--vscode-editorGroup-border));
+}
+
+.header-icon {
+  font-size: 1.1em;
+}
+
+.header-title {
+  font-size: 1em;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--vscode-editor-foreground);
+}
+
+/* ── Stats Column ───────────────────────────────────── */
+
+.stats-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.stat-card {
+  background-color: var(--vscode-sideBar-background, var(--vscode-editorWidget-background));
+  border: 1px solid var(--vscode-panel-border, var(--vscode-editorGroup-border));
+  border-left-width: 3px;
+  border-radius: 4px;
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-card[data-accent="blue"]   { border-left-color: var(--vscode-charts-blue,   #007acc); }
+.stat-card[data-accent="green"]  { border-left-color: var(--vscode-charts-green,  #4ec9b0); }
+.stat-card[data-accent="orange"] { border-left-color: var(--vscode-charts-orange, #ce9178); }
+.stat-card[data-accent="purple"] { border-left-color: var(--vscode-charts-purple, #7b5ea7); }
+.stat-card[data-accent="yellow"] { border-left-color: var(--vscode-charts-yellow, #d7ba7d); }
+
+/* ── Son 7 Gün Mini Chart ───────────────────────────── */
+
+.seven-days-section {
+  background-color: var(--vscode-sideBar-background, var(--vscode-editorWidget-background));
+  border: 1px solid var(--vscode-panel-border, var(--vscode-editorGroup-border));
+  border-radius: 4px;
+  padding: 10px 12px 12px;
+  margin-bottom: 8px;
+}
+
+.section-label {
+  font-size: 0.68em;
+  color: var(--vscode-descriptionForeground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+.mini-chart-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.mini-chart-row--today .mini-chart-day {
+  color: var(--vscode-editor-foreground);
+  font-weight: 600;
+}
+
+.mini-chart-day {
+  font-size: 0.72em;
+  color: var(--vscode-descriptionForeground);
+  width: 52px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.mini-chart-bar {
+  flex: 1;
+  height: 6px;
+  appearance: none;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--vscode-panel-border, var(--vscode-editorGroup-border));
+}
+
+.mini-chart-bar::-webkit-progress-bar {
+  background-color: var(--vscode-panel-border, var(--vscode-editorGroup-border));
+  border-radius: 3px;
+}
+
+.mini-chart-bar::-webkit-progress-value {
+  background-color: var(--vscode-charts-blue, #007acc);
+  border-radius: 3px;
+}
+
+.mini-chart-row--today .mini-chart-bar::-webkit-progress-value {
+  background-color: var(--vscode-charts-green, #4ec9b0);
+}
+
+.mini-chart-dur {
+  font-size: 0.68em;
+  color: var(--vscode-descriptionForeground);
+  width: 42px;
+  text-align: right;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.mini-empty {
+  font-size: 0.75em;
+  color: var(--vscode-descriptionForeground);
+  text-align: center;
+  padding: 4px 0;
+}
+
+.stat-label {
+  font-size: 0.72em;
+  color: var(--vscode-descriptionForeground);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.stat-value {
+  font-size: 0.95em;
+  font-weight: 700;
+  color: var(--vscode-editor-foreground);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Pomodoro Section ───────────────────────────────── */
+
+.pomodoro-section {
+  background-color: var(--vscode-sideBar-background, var(--vscode-editorWidget-background));
+  border: 1px solid var(--vscode-panel-border, var(--vscode-editorGroup-border));
+  border-radius: 4px;
+  padding: 10px 12px 12px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+.pomodoro-section-label {
+  font-size: 0.68em;
+  color: var(--vscode-descriptionForeground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+.pomodoro-timer {
+  font-size: 1.4em;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--vscode-editor-foreground);
+  min-height: 1.6em;
+  letter-spacing: 0.02em;
+}
+
+.pomodoro-timer:empty::before {
+  content: 'Pomodoro';
+  font-size: 0.75em;
+  font-weight: 400;
+  color: var(--vscode-descriptionForeground);
+  letter-spacing: 0;
+}
+
+.pomodoro-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Buttons ────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 14px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.btn:hover { opacity: 0.85; }
+
+.btn-primary {
+  background-color: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border-color: var(--vscode-button-background);
+}
+
+.btn-primary:hover {
+  background-color: var(--vscode-button-hoverBackground);
+  opacity: 1;
+}
+
+.btn-secondary {
+  background-color: var(--vscode-button-secondaryBackground, transparent);
+  color: var(--vscode-button-secondaryForeground, var(--vscode-editor-foreground));
+  border-color: var(--vscode-panel-border, var(--vscode-editorGroup-border));
+}
+
+.btn-secondary:hover {
+  background-color: var(--vscode-list-hoverBackground);
+  opacity: 1;
+}
+
+/* ── Footer ─────────────────────────────────────────── */
+
+.footer {
+  padding-top: 8px;
+}
+
+.summary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--vscode-panel-border, var(--vscode-editorGroup-border));
+  background-color: var(--vscode-sideBar-background, var(--vscode-editorWidget-background));
+  color: var(--vscode-textLink-foreground, #4a9eff);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.summary-btn:hover {
+  background-color: var(--vscode-list-hoverBackground);
+  border-color: var(--vscode-focusBorder, var(--vscode-textLink-foreground, #4a9eff));
+}
+
+.summary-btn-arrow {
+  font-size: 1.1em;
+  opacity: 0.6;
+}
